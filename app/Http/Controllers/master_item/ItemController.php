@@ -20,7 +20,6 @@ class ItemController extends Controller
     {
         $data = Item::with([
             'category_brand:id,name',
-            'detail_brand:id,name',
             'category_product:id,name',
         ])->get();
 
@@ -39,12 +38,10 @@ class ItemController extends Controller
 
         $category_brand = Category_brand::all();
         $category_product = Category_product::all();
-        $detail_brand = Detail_brand::all();
 
         return view('pages.master_item.item.create', [
             'category_brand' => $category_brand,
             'category_product' => $category_product,
-            'detail_brand' => $detail_brand,
         ]);
     }
 
@@ -57,11 +54,12 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'name' => 'required|unique:items',
             'category_product_id' => 'required',
             'category_brand_id' => 'required',
-            'detail_brand_id' => 'required',
             'qty' => 'required|numeric'
         ]);
+
 
         Item::create($validated);
         return redirect('master/item');
@@ -89,17 +87,14 @@ class ItemController extends Controller
         $data = Item::with([
             'category_brand:id,name',
             'category_product:id,name',
-            'detail_brand:id,name'
         ])->where('id', $id)->first();
 
         $category_brand = Category_brand::all();
         $category_product = Category_product::all();
-        $detail_brand = Detail_brand::all();
 
         return view('pages.master_item.item.edit', [
             'category_brand' => $category_brand,
             'category_product' => $category_product,
-            'detail_brand' => $detail_brand,
             'data_edit' => $data
         ]);
     }
@@ -113,13 +108,16 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
+
+
+
         $validated = $request->validate([
-            'category_product_id' => 'required',
-            'category_brand_id' => 'required',
-            'detail_brand_id' => 'required',
+            'name' => 'required',
+            'category_product_id' => 'required|numeric',
+            'category_brand_id' => 'required|numeric',
             'qty' => 'required|numeric'
         ]);
+
 
         Item::where('id', $id)->update($validated);
         return redirect('master/item');
@@ -137,13 +135,13 @@ class ItemController extends Controller
         return redirect('master/item');
     }
 
-    public function store_detail_brand(Request $request)
-    {
-        $validated =  $request->validate([
-            'name' => 'required|unique:detail_brands',
-        ]);
+    // public function store_detail_brand(Request $request)
+    // {
+    //     $validated =  $request->validate([
+    //         'name' => 'required|unique:detail_brands',
+    //     ]);
 
-        Detail_brand::create($validated);
-        return redirect('master/item/create');
-    }
+    //     Detail_brand::create($validated);
+    //     return redirect('master/item/create');
+    // }
 }

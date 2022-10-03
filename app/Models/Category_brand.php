@@ -10,4 +10,14 @@ class Category_brand extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function category_brand()
+    {
+        return $this->belongsTo(Category_brand::class);
+    }
 }

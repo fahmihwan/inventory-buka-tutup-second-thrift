@@ -10,6 +10,7 @@
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Manage Receiving Transcation </h3>
             </div>
+
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
@@ -22,6 +23,12 @@
         </div>
     </div>
     <section class="section">
+
+        @if (session()->has('fail'))
+            <div class="alert alert-danger mb-4">
+                <i class="fa-solid fa-bell"></i> {!! session('fail') !!}
+            </div>
+        @endif
 
         <div class="card">
             <div class="card-body p-2 ">
@@ -93,11 +100,27 @@
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-12">
-
-                                                {{-- <label for="contact-info-vertical ">Category Product</label> --}}
+                                                <div class="form-group">
+                                                    <label for="valid-state">Nama Item</label>
+                                                    <div class="form-group">
+                                                        <select name="name" class="choices form-select">
+                                                            @foreach ($item_name as $detail)
+                                                                <option value="{{ $detail->id }}">
+                                                                    {{ $detail->name }} &nbsp; &nbsp;
+                                                                    {{-- [ Kategori Brand
+                                                                    {{ $detail->category_brand->name }} ] --}}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="hidden" name="ball_number"
+                                                    value="{{ $receiving->ball_number }}">
                                                 <input type="hidden" name="category_product_id"
                                                     value="{{ $receiving->category_product->id }}">
-
+                                                {{-- 
                                                 <div class="form-group">
                                                     <label for="valid-state">Kategori Brand</label>
                                                     <select name="category_brand_id" class="choices form-select">
@@ -107,35 +130,15 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
                                             </div>
-                                            <div class="col-12">
-                                                <label for="">Detail Brand</label>
-                                                <div class="form-group d-flex">
-                                                    <div style="width: 100%">
-                                                        <select name="detail_brand_id" class="choices form-select">
-                                                            @foreach ($detail_brand as $detail)
-                                                                <option value="{{ $detail->id }}">{{ $detail->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div style="width: 18%;">
-                                                        <!-- Button trigger for basic modal -->
-                                                        <button type="button"
-                                                            class="btn rounded-none rounded-end  btn-warning block"
-                                                            data-bs-toggle="modal" data-bs-target="#default"
-                                                            style="width: 100%; height: 100%;">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="contact-info-vertical">Open Qty</label>
                                                     <input type="number" id="contact-info-vertical" class="form-control"
-                                                        name="open_qty" placeholder="Qty">
+                                                        name="open_qty" placeholder="Qty" min="1" required
+                                                        style="width:200px;">
                                                 </div>
                                             </div>
                                             <div class="col-12 d-flex justify-content-end">
@@ -152,7 +155,7 @@
                 </div>
 
                 <!--Basic Modal -->
-                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog"
+                {{-- <div class="modal fade text-left" id="default" tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                         <form action="/master/detail-brand" method="post" class="form form-vertical">
@@ -202,7 +205,7 @@
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> --}}
                 {{-- end Modal --}}
                 {{-- <div class="col-md-6 col-12">
 

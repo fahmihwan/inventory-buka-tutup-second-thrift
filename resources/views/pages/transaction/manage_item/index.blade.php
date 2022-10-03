@@ -91,8 +91,8 @@
                     <thead>
                         <tr>
                             <th class="p-1">No</th>
+                            <th class="p-1">Name</th>
                             <th class="p-1">Category Brand</th>
-                            <th class="p-1">Detail Brand</th>
                             <th class="p-1">qty</th>
                             <th class="p-1">Action</th>
                         </tr>
@@ -101,9 +101,9 @@
                         @foreach ($manage_item as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td class="p-1"> {{ $item->item->name }}</td>
                                 <td class="p-1"> {{ $item->item->category_brand->name }}</td>
-                                <td class="p-1"> {{ $item->item->detail_brand->name }}</td>
-                                <td class="p-1"> {{ $item->item->qty }}</td>
+                                <td class="p-1"> {{ $item->qty }}</td>
                                 <td>
                                     <form action="" method="post" class=" d-inline-block">
                                         @method('delete')

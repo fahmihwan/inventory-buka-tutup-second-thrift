@@ -36,40 +36,21 @@
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="valid-state">Pilih Catgory Product</label>
-                                                <div class="form-group">
-                                                    <select name="category_product_id" class="choices form-select">
-                                                        @foreach ($category_product as $product)
-                                                            <option value="{{ $product->id }}">{{ $product->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="valid-state">Pilih Category Brand</label>
-                                                <div class="form-group">
-                                                    <select name="category_brand_id" class="choices form-select ">
-                                                        <option value="0" selected>non brand</option>
-                                                        @foreach ($category_brand as $brand)
-                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="form-group ">
-                                                <label for="valid-state ">Detail Brand </label>
+                                                <label for="valid-state ">Nama Item</label>
                                                 <div class="form-group d-flex">
                                                     <div style="width: 80%">
-                                                        <select name="detail_brand_id" class="choices form-select">
+                                                        {{-- <select name="detail_brand_id" class="choices form-select">
+                                                            <option value="{{ $data_edit->detail_brand->id }}">
+                                                                {{ $data_edit->detail_brand->name }}</option>
                                                             @foreach ($detail_brand as $detail)
                                                                 <option value="{{ $detail->id }}">{{ $detail->name }}
                                                                 </option>
                                                             @endforeach
-                                                        </select>
+                                                        </select> --}}
+                                                        <input type="text" name="name" class="form-control "
+                                                            id="valid-state" placeholder="" value="" required>
+
                                                     </div>
                                                     <div style="width: 18%">
                                                         <!-- Button trigger for basic modal -->
@@ -83,6 +64,31 @@
 
                                                 </div>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="valid-state">Pilih Kategori Produk</label>
+                                                <div class="form-group">
+                                                    <select name="category_product_id" class="choices form-select">
+                                                        @foreach ($category_product as $product)
+                                                            <option value="{{ $product->id }}">{{ $product->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="valid-state">Pilih Kategori Brand</label>
+                                                <div class="form-group">
+                                                    <select name="category_brand_id" class="choices form-select ">
+                                                        @foreach ($category_brand as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
 
 
                                             <div class="form-group">

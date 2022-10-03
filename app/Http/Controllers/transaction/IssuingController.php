@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\transaction;
 
 use App\Http\Controllers\Controller;
-use App\Models\Detail_Issuing;
+use App\Models\Category_product;
 use App\Models\Issuing;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +34,14 @@ class IssuingController extends Controller
      */
     public function create()
     {
-        return view('pages.transaction.issuing.create');
+
+        $items = Item::with(['category_brand'])->get();;
+        $category_product = Category_product::all();
+
+        return view('pages.transaction.issuing.create', [
+            'items' => $items,
+            'category_product' => $category_product,
+        ]);
     }
 
     /**
@@ -90,5 +98,14 @@ class IssuingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_item_ajax($id)
+    {
+        $getItem = Item::with('category_brand')->where('category_product_id', $id)->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $getItem
+        ]);
     }
 }

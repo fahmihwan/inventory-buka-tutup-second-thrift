@@ -9,6 +9,7 @@ class Issuing extends Model
 {
     use HasFactory;
 
+    protected $id = ['id'];
 
     public function customer()
     {

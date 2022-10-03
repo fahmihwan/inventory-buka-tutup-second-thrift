@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\transaction\IssuingController;
 use App\Http\Controllers\transaction\ReceivingController;
 
-use App\Http\Controllers\master_item\DetailBrandController;
+
 use App\Http\Controllers\master_item\ItemController;
 use App\Http\Controllers\master_item\KategoriBrandController;
 use App\Http\Controllers\master_item\KategoriProukController;
@@ -36,16 +36,20 @@ Route::resource('supplier-customer/customer', CustomerController::class);
 
 Route::resource('master/kategori-produk', KategoriProukController::class);
 Route::resource('master/kategori-brand', KategoriBrandController::class);
-Route::resource('master/detail-brand', DetailBrandController::class);
+
 
 Route::resource('master/item', ItemController::class);
-Route::post('master/item/store_detail_brand', [ItemController::class, 'store_detail_brand']);
+// Route::post('master/item/store_detail_brand', [ItemController::class, 'store_detail_brand']);
 
 Route::resource('transaction/receiving', ReceivingController::class);
 Route::resource('transaction/manage-receiving', Manage_itemController::class);
 Route::get('transaction/manage-receiving/{ball_number}/create', [Manage_itemController::class, 'create_manage_receiving']);
 
+
 Route::resource('transaction/issuing', IssuingController::class);
+Route::get('transaction/issuing/{id}/get-item-ajax', [IssuingController::class, 'get_item_ajax']);
+
+
 
 Route::get('report/stock', [ReportStockController::class, 'index']);
 Route::get('report/issuing', [ReportIssuingController::class, 'index']);

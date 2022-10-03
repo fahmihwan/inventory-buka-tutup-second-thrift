@@ -10,6 +10,8 @@ use App\Models\Item;
 use App\Models\Manage_item;
 use App\Models\Receiving;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class Manage_itemController extends Controller
 {
@@ -42,22 +44,59 @@ class Manage_itemController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'ball_number' => 'required',
+            'category_product_id' => 'required|numeric',
+            'name' => 'required|numeric',
+            'open_qty' => 'required|numeric'
+        ]);
 
-        // dd($request->detail_brand_id);
-        // dd($request->category_brand_id);
-        // dd($request->category_product_id);
-        $getItem = Item::where('detail_brand_id', '=', $request->category_product_id)
-            ->where('category_brand_id', '=', $request->category_brand_id);
-
+        // item update nanti 
+        $getItem = Item::where('category_product_id', '=', $request->category_product_id)
+            ->where('id', '=', $request->name);
 
         if ($getItem->exists() == null) { //cek jika tidak ada
-            return redirect()->back();
+            return redirect()->back()->with('fail', 'Fail !!, Item Belum ada, mau menambahkan Item sekarang? <a href="/master/item/create"
+            class="text-decoration-underline ">
+            Ya, tambah Item Sekarang</a>');
+        }
+        // get open_qty from receiving 
+        $get_receiving = Receiving::where('ball_number', $request->ball_number)->first();
+        $current_open_qty_receiving = $get_receiving->open_qty;
+        $current_open_qty_receiving += $request->open_qty;
+
+        // cheack if open_qty is full
+        if ($get_receiving->target_qty < $current_open_qty_receiving) {
+            return redirect()->back()->with('fail', ' Fail !!, Open qty melebihi Target ');
+        }
+        ///update qty from item now
+        $data_item = $getItem->first();
+        $current_qty_item =  $data_item->qty;
+        $current_qty_item += $request->open_qty;
+
+        try {
+            DB::beginTransaction();
+
+            Receiving::where('ball_number', $request->ball_number)->update([
+                'open_qty' => $current_open_qty_receiving,
+            ]);
+
+            Item::where('id', $data_item->id)->update([
+                'qty' => $current_qty_item
+            ]);
+
+            Manage_item::create([
+                'item_id' => $data_item->id,
+                'receiving_id' => $get_receiving->id,
+                'qty' => $request->open_qty
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
         }
 
-
-        // where('category_brand_id', '=', $request->category_brand_id)
-
-        dd($getItem);
+        return redirect()->back();
     }
 
     /**
@@ -73,8 +112,7 @@ class Manage_itemController extends Controller
 
         $get_id_from_receiving = $receiving->id;
 
-
-        $manage_item = Manage_item::with(['item.category_brand', 'item.detail_brand'])
+        $manage_item = Manage_item::with(['item.category_brand'])
             ->where(['receiving_id' => $get_id_from_receiving])
             ->get();
 
@@ -125,14 +163,23 @@ class Manage_itemController extends Controller
             ->where('ball_number', $ball_number)->first();
 
 
-        $category_brand = Category_brand::latest()->get();
+        $items = Item::with('category_brand')->where('category_product_id', $receiving->category_product_id)->get();;
+        // return $items;
 
-        $detail_brand = Detail_brand::latest()->get();
+
+        $category_brand = Category_brand::with(['items'])
+            ->latest()->get();
+
+
+
+        // $category_brand = Category_brand::latest()->get();
+
+        // $detail_brand = Detail_brand::latest()->get();
 
         return view('pages.transaction.manage_item.create', [
             'receiving' => $receiving,
             'category_brand' => $category_brand,
-            'detail_brand' => $detail_brand,
+            'item_name' => $items,
         ]);
     }
 }

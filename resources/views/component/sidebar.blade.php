@@ -43,9 +43,6 @@
                             <a href="/master/kategori-brand">Kategori Brand</a>
                         </li>
                         <li>
-                            <a href="/master/detail-brand">Detail Brand</a>
-                        </li>
-                        <li>
                             <a href="/master/item">Item</a>
                         </li>
                     </ul>

@@ -69,6 +69,7 @@ class KategoriBrandController extends Controller
     public function edit($id)
     {
         $data = Category_brand::where(['id' => $id])->first();
+
         return view('pages.master_item.kategori_brand.edit', [
             'data' => $data,
         ]);
@@ -83,6 +84,7 @@ class KategoriBrandController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $data = $request->validate([
             'name' => 'required|unique:category_brands',
         ]);

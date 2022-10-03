@@ -32,9 +32,9 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
+                            <th class="p-3">Detail Item</th>
                             <th class="p-3">Kategori Brand</th>
                             <th class="p-3">Kategori Produk</th>
-                            <th class="p-3">Detail Brand</th>
                             <th class="p-3">Qty</th>
                             <th class="p-0">Action</th>
                         </tr>
@@ -43,9 +43,9 @@
                         @foreach ($items as $item)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
+                                <td class="p-3">{{ $item->name }}</td>
                                 <td class="p-3">{{ $item->category_brand->name }}</td>
                                 <td class="p-3">{{ $item->category_product->name }}</td>
-                                <td class="p-3">{{ $item->detail_brand->name }}</td>
                                 <td class="p-3">{{ $item->qty }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/master/item/{{ $item->id }}/edit"

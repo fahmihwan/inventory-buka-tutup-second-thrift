@@ -9,14 +9,11 @@ class Manage_item extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function item()
     {
         return $this->belongsTo(Item::class);
-    }
-
-    public function detail_brand()
-    {
-        return $this->belongsTo(Detail_brand::class);
     }
 
     public function category_brand()

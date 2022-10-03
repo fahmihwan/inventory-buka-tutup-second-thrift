@@ -7,7 +7,7 @@
     <div class="page-title">
         <div class="row pb-3">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Kategori Produk</h3>
+                <h3>Kategori Brand</h3>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/master/kategori-produk/{{ $data->id }}" method="POST"
+                            <form action="/master/kategori-brand/{{ $data->id }}" method="POST"
                                 class="form form-vertical">
                                 @method('PUT')
                                 @csrf

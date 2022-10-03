@@ -37,6 +37,7 @@
         </div>
     </div>
 
+
     @yield('script')
 
     <script src="{{ asset('assets/js/feather-icons/feather.min.js') }}"></script>

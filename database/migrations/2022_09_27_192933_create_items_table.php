@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('category_brand_id');
             $table->foreignId('category_product_id');
-            $table->foreignId('detail_brand_id');
             $table->integer('qty');
             $table->timestamps();
         });

@@ -16,10 +16,6 @@ class Item extends Model
         return $this->belongsTo(Category_brand::class);
     }
 
-    public function detail_brand()
-    {
-        return $this->belongsTo(Detail_brand::class);
-    }
 
     public function category_product()
     {

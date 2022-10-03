@@ -27,16 +27,47 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Vertical Form</h4>
+                        <h4 class="card-title">Update </h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/master/item/{{ $data_edit->id }}" method="post" class="form form-vertical">
+                            <form action="/master/item/{{ $data_edit->id }}" method="POST" class="form form-vertical">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-12">
+
+                                            <div class="form-group ">
+                                                <label for="valid-state ">Detail item </label>
+                                                <div class="form-group d-flex">
+                                                    <div style="width: 80%">
+                                                        {{-- <select name="detail_brand_id" class="choices form-select">
+                                                            <option value="{{ $data_edit->detail_brand->id }}">
+                                                                {{ $data_edit->detail_brand->name }}</option>
+                                                            @foreach ($detail_brand as $detail)
+                                                                <option value="{{ $detail->id }}">{{ $detail->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select> --}}
+                                                        <input type="text" name="name" class="form-control "
+                                                            id="valid-state" placeholder="" value="{{ $data_edit->name }}"
+                                                            required>
+
+                                                    </div>
+                                                    <div style="width: 18%">
+                                                        <!-- Button trigger for basic modal -->
+                                                        <button type="button"
+                                                            class="btn rounded-none rounded-end  btn-warning block"
+                                                            data-bs-toggle="modal" data-bs-target="#default"
+                                                            style="width: 100%; height: 100%;">
+                                                            <i class="fa-solid fa-plus"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="valid-state">Pilih Catgory Product</label>
                                                 <div class="form-group">
@@ -58,35 +89,10 @@
                                                         <option value="{{ $data_edit->category_brand->id }}" selected>
                                                             {{ $data_edit->category_brand->name }}</option>
                                                         @foreach ($category_brand as $brand)
-                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group ">
-                                                <label for="valid-state ">Detail Brand </label>
-                                                <div class="form-group d-flex">
-                                                    <div style="width: 80%">
-                                                        <select name="detail_brand_id" class="choices form-select">
-                                                            <option value="{{ $data_edit->detail_brand->id }}">
-                                                                {{ $data_edit->detail_brand->name }}</option>
-                                                            @foreach ($detail_brand as $detail)
-                                                                <option value="{{ $detail->id }}">{{ $detail->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div style="width: 18%">
-                                                        <!-- Button trigger for basic modal -->
-                                                        <button type="button"
-                                                            class="btn rounded-none rounded-end  btn-warning block"
-                                                            data-bs-toggle="modal" data-bs-target="#default"
-                                                            style="width: 100%; height: 100%;">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </button>
-                                                    </div>
-
                                                 </div>
                                             </div>
 
@@ -102,7 +108,7 @@
 
                                         </div>
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Updte</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                         </div>
                                     </div>

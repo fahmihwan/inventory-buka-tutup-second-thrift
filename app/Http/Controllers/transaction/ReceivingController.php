@@ -66,7 +66,7 @@ class ReceivingController extends Controller
             'supplier_id' => $request->supplier_id,
             'category_product_id' => $request->category_product_id,
             'target_qty' => $request->target_qty,
-            'open_qty' => $request->target_qty,
+            'open_qty' => 0,
             'date' => $request->date,
             'note' => $request->note,
             'price' => $request->price,

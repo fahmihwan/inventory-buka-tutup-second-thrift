@@ -16,6 +16,7 @@ class KategoriProukController extends Controller
     public function index()
     {
         $katgori = Category_product::all();
+
         return view(
             'pages.master_item.kategori_produk.index',
             [

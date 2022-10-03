@@ -17,9 +17,9 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'category_brand_id' => fake()->randomElement([1, 2, 3]),
+            'name' => fake()->name(),
             'category_product_id' => fake()->randomElement([1, 2, 3, 4]),
-            'detail_brand_id' => fake()->randomElement([1, 2, 3]),
+            'category_brand_id' => fake()->randomElement([1, 2, 3]),
             'qty' => fake()->randomDigit(1),
         ];
     }
