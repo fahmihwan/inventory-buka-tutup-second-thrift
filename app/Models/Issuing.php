@@ -9,7 +9,7 @@ class Issuing extends Model
 {
     use HasFactory;
 
-    protected $id = ['id'];
+    protected $guarded = ['id'];
 
     public function customer()
     {
@@ -17,8 +17,8 @@ class Issuing extends Model
     }
 
     //tes
-    public function detail_issuing()
+    public function detail_issuings()
     {
-        return $this->hasOne(Detail_Issuing::class);
+        return $this->hasMany(Detail_Issuing::class);
     }
 }

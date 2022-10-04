@@ -23,6 +23,12 @@
         </div>
     </div>
 
+    @if (session()->has('fail'))
+        <div class="alert alert-danger mb-4">
+            <i class="fa-solid fa-bell"></i> {!! session('fail') !!}
+        </div>
+    @endif
+
     <section class="section">
         <div class="row match-height">
             <div class="col-md-4 col-12">
@@ -32,7 +38,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/master/item" method="POST" class="form form-vertical">
+                            <form action="/transaction/detail_issuing" method="POST" class="form form-vertical">
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
@@ -54,19 +60,25 @@
                                             <div class="form-group ">
                                                 <label for="valid-state">Pilih Item</label>
                                                 <div class="form-group ">
-                                                    <select class="form-control js-example-basic-single-2 " name="Item"
+                                                    <select class="form-control js-example-basic-single-2 " name="item_id"
                                                         style="">
+                                                        <option value="0"> -- pilih Item --</option>
                                                     </select>
                                                 </div>
                                             </div>
-
                                         </div>
-                                        <div class="col-12 d-flex justify-content-end">
-                                            <input type="number" class="form-control me-3" style="width: 60px"
-                                                min="1" max="10">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </button>
+                                        <div class="col-12 d-flex align-items-center justify-content-between">
+                                            <div class="">
+                                                Jml Item : <span id="jml-item">0</span>
+                                            </div>
+                                            <div class="d-flex">
+                                                <input type="number" name="qty" class="form-control me-3"
+                                                    style="width: 60px" min="1" max="10" value="0"
+                                                    autocomplete="off">
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,18 +88,17 @@
                 </div>
             </div>
 
-
-
-
-
             <div class="col-md-8 col-12">
                 <div class="card">
-                    <div class="card-header pb-0 mb-0">
+                    <div class="card-header pb-0 mb-0  d-flex justify-content-between">
                         <h4 class="card-title">Form </h4>
+                        <a href="/transaction/issuing" class=" me-1 mb-1">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Kembali</a>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form action="/master/item" method="POST" class="form form-vertical">
+                            <form action="/transaction/issuing" method="POST" class="form form-vertical">
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
@@ -95,19 +106,20 @@
                                             <div class="form-group ">
                                                 <label for="valid-state">Tanggal</label>
                                                 <div class="form-group ">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" name="date" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label for="valid-state">Customer</label>
                                                 <div class="form-group ">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="customer" value="{{ old('customer_id') }}"
+                                                        class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="form-group ">
                                                 <label for="valid-state">alamat</label>
                                                 <div class="form-group ">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" name="address" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +127,7 @@
                                             <div class="form-group ">
                                                 <label for="valid-state">note</label>
                                                 <div class="form-group ">
-                                                    <textarea name="" id="" cols="" rows="3" class="form-control"></textarea>
+                                                    <textarea name="note" id="" cols="" rows="3" class="form-control" required></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group float-end">
@@ -135,12 +147,33 @@
                                 <tr>
                                     <th class="p-3">No</th>
                                     <th class="p-3">Item</th>
+                                    <th class="p-3">Brand</th>
                                     <th class="p-3">Category</th>
                                     <th class="p-3">Qty</th>
                                     <th class="p-0">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($detail_issuings as $detail)
+                                    <tr>
+                                        <td class="p-3">{{ $loop->iteration }}</td>
+                                        <td class="p-3">{{ $detail->item->name }} </td>
+                                        <td class="p-3">{{ $detail->item->category_brand->name }}</td>
+                                        <td class="p-3">{{ $detail->item->category_product->name }}</td>
+                                        <td class="p-3">{{ $detail->qty }}</td>
+                                        <td style="padding: 0px;">
+                                            <form action="/transaction/detail_issuing/{{ $detail->id }}" method="post"
+                                                class=" d-inline-block">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn badge  btn-sm round btn-danger"
+                                                    onClick="return confirm('Are you sure?')">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -165,23 +198,67 @@
             $('.js-example-basic-single-2').select2();
 
             $('.js-example-basic-single-1').change(function(e) {
-                let text = ""
-
-                $.ajax({
-                    type: 'GET',
-                    url: `/transaction/issuing/${$(this).val()}/get-item-ajax`,
-                    success: function(data) {
-                        console.log(data)
-                        if (data.status == 200) {
-                            data.data.forEach(e => {
-                                text +=
-                                    `<option value="${e.id}"> [${e.category_brand.name}] -- ${e.name} <option>`;
-                            });
-                            $('.js-example-basic-single-2').html(text)
-                        }
-                    }
-                });
+                clearOption()
+                getProduct($(this).val())
+                $('#jml-item').html(` <span class="text-danger">  null </span>`)
             })
+
+            function getData(url) {
+                return $.ajax({
+                    type: 'GET',
+                    url: url,
+                });
+            }
+
+            async function getProduct(category_product_id) {
+                try {
+                    const res = await getData(`/transaction/issuing/${category_product_id}/get-item-ajax`)
+                    let text = "";
+                    let textData = []
+                    if (res.status == 200) {
+                        res.data.forEach(e => {
+                            textData.push({
+                                id: e.id,
+                                text: `[${e.category_brand.name}] -- ${e.name}`,
+                            })
+                        });
+
+                        $(".js-example-basic-single-2").prepend('<option></option>').select2({
+                            allowClear: true,
+                            placeholder: "Select...",
+                            data: textData,
+                            width: "100%"
+                        });
+
+
+                        $('.js-example-basic-single-2').change(function(e) {
+                            $.ajax({
+                                type: 'GET',
+                                url: `/transaction/issuing/${$(this).val()}/get-valut-item-ajax`,
+                                success: function(data) {
+                                    if (data.status == 200) {
+                                        data.data.forEach(e => {
+                                            $('#jml-item').html(e.qty)
+                                        })
+                                    }
+                                }
+                            })
+
+                        })
+
+                    }
+                } catch (err) {
+                    alert(err);
+                }
+            }
+
+            function clearOption() {
+                $(".js-example-basic-single-2").empty();
+            }
+
+
+
+
 
         });
     </script>

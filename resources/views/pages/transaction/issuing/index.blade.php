@@ -32,6 +32,7 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
+                            <th class="p-3">Tanggal</th>
                             <th class="p-3">No Referensi</th>
                             <th class="p-3">Customer</th>
                             <th class="p-3" style="width: 240px">Address</th>
@@ -42,14 +43,15 @@
                     <tbody>
                         @foreach ($issuing_data as $data)
                             <tr class="p-0 m-0 ">
-                                <td class="p-3">1</td>
+                                <td class="p-3">{{ $loop->iteration }}</td>
+                                <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->no_referensi }}</td>
                                 <td class="p-3">{{ $data->customer->name }}</td>
                                 <td class="p-3" style="width: 240px">{{ $data->customer->address }}</td>
-                                <td class="p-3">{{ $data->detail_issuing_sum_qty ? $data->detail_issuing_sum_qty : 0 }}
-                                </td>
+                                <td class="p-3">{{ $data->detail_issuings_sum_qty }}</td>
                                 <td style="padding: 0px;">
-                                    <a href="" class="btn badge btn-sm round btn-info ">
+                                    <a href="/transaction/issuing/{{ $data->id }}"
+                                        class="btn badge btn-sm round btn-info ">
                                         <i class="fa-regular fa-folder-open"></i>
                                     </a>
                                     {{-- <form action="" method="post" class=" d-inline-block">

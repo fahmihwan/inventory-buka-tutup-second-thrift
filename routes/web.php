@@ -14,6 +14,7 @@ use App\Http\Controllers\report\ReportReceivingController;
 use App\Http\Controllers\report\ReportStockController;
 use App\Http\Controllers\supplier_customer\CustomerController;
 use App\Http\Controllers\supplier_customer\SupplierController;
+use App\Http\Controllers\transaction\Detail_issuingController;
 use App\Http\Controllers\transaction\Manage_itemController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,10 +46,10 @@ Route::resource('transaction/receiving', ReceivingController::class);
 Route::resource('transaction/manage-receiving', Manage_itemController::class);
 Route::get('transaction/manage-receiving/{ball_number}/create', [Manage_itemController::class, 'create_manage_receiving']);
 
-
 Route::resource('transaction/issuing', IssuingController::class);
 Route::get('transaction/issuing/{id}/get-item-ajax', [IssuingController::class, 'get_item_ajax']);
-
+Route::get('transaction/issuing/{id}/get-valut-item-ajax', [IssuingController::class, 'get_value_item_ajax']);
+Route::resource('transaction/detail_issuing', Detail_issuingController::class);
 
 
 Route::get('report/stock', [ReportStockController::class, 'index']);

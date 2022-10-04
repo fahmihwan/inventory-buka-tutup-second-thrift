@@ -10,4 +10,10 @@ class Detail_Issuing extends Model
     use HasFactory;
 
     protected $table = 'detail_issuings';
+    protected $guarded = ['id'];
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

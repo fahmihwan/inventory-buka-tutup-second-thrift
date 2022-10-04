@@ -4,7 +4,7 @@ namespace App\Http\Controllers\transaction;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category_brand;
-use App\Models\Category_product;
+
 use App\Models\Detail_brand;
 use App\Models\Item;
 use App\Models\Manage_item;
