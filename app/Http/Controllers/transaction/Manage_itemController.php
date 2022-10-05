@@ -156,7 +156,6 @@ class Manage_itemController extends Controller
      */
     public function destroy($id)
     {
-
         $manage_item = Manage_item::where('id', $id)->first();
         $item = Item::where('id', $manage_item->id)->first();
 
@@ -181,6 +180,7 @@ class Manage_itemController extends Controller
         // update item qty
         return redirect()->back();
     }
+
 
 
     public function create_manage_receiving($ball_number)

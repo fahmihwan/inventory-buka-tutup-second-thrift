@@ -138,6 +138,7 @@ class IssuingController extends Controller
     public function show($id)
     {
 
+
         $data = Issuing::with([
             'customer',
             'detail_issuings.item.category_brand',
@@ -158,6 +159,12 @@ class IssuingController extends Controller
      */
     public function edit($id)
     {
+        $issuing = Issuing::with('customer')->where('id', $id)->first();
+
+        // return $issuing;
+        return view('pages.transaction.issuing.edit', [
+            'data' => $issuing,
+        ]);
     }
 
     /**
@@ -169,7 +176,33 @@ class IssuingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'customer_id' => 'required',
+            'date' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'note' => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            Customer::where('id', $validated['customer_id'])->update([
+                'name' => $validated['name'],
+                'address' => $validated['address'],
+            ]);
+
+            Issuing::where('id', $id)->update([
+                'date' => $validated['date'],
+                'note' => $validated['note'],
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+        }
+
+        return redirect('/transaction/issuing/' . $id);
     }
 
     /**
@@ -180,7 +213,24 @@ class IssuingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $detail_issuing = Detail_Issuing::where('id', $id)->first();
+        $item = Item::where('id', $detail_issuing->item_id)->first();
+        $update_item = $item->qty += $detail_issuing->qty;
+
+        try {
+            DB::beginTransaction();
+
+            Item::where('id', $detail_issuing->item_id)->update([
+                'qty' => $update_item
+            ]);
+
+            Detail_Issuing::where('id', $id)->delete();
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+
+        return redirect()->back();
     }
 
     public function get_item_ajax($id)

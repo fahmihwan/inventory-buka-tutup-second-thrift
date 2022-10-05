@@ -32,10 +32,6 @@
                                 print
                                 <i class="fa-solid fa-print"></i>
                             </a>
-                            {{-- |
-                            <a href="/transaction/issuing/{{ $id }}/edit" class="ms-3 text-warning ">
-                                edit <i class="fa-solid fa-pen-to-square"></i>
-                            </a> --}}
                         </div>
                         <a href="/transaction/issuing" class=" me-1 mb-1 ms-5">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -48,8 +44,13 @@
 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header text-warning">
-                        Detail Tansaksi
+                    <div class="card-header  d-flex justify-content-between">
+                        <div class="text-danger">
+                            Detail Tansaksi
+                        </div>
+                        <a href="/transaction/issuing/{{ $id }}/edit" class="ms-3 text-warning ">
+                            edit <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
                     </div>
                     <div class="card-body">
                         <table>
@@ -88,6 +89,7 @@
                                     <th class="p-3">Brand</th>
                                     <th class="p-3">Category</th>
                                     <th class="p-3">Qty</th>
+                                    <th class="p-0">Action</th>
 
                                 </tr>
                             </thead>
@@ -99,6 +101,17 @@
                                         <td class="p-3">{{ $item->item->category_brand->name }}</td>
                                         <td class="p-3">{{ $item->item->category_product->name }}</td>
                                         <td class="p-3">{{ $item->qty }}</td>
+                                        <td>
+                                            <form action="/transaction/issuing/{{ $item->id }}" method="post"
+                                                class=" d-inline-block">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn badge  btn-sm round btn-danger"
+                                                    onClick="return confirm('Are you sure?')">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
 
