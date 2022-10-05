@@ -107,6 +107,18 @@ class ReceivingController extends Controller
      */
     public function edit($id)
     {
+
+        $receiving = Receiving::with(['supplier'])
+            ->where('ball_number', $id)->first();
+
+
+        $supplier = Supplier::latest()->get();
+        $category_product = Category_product::latest()->get();
+        return view('pages.transaction.receiving.edit', [
+            'receiving' => $receiving,
+            'supplier' => $supplier,
+            'category_product' => $category_product
+        ]);
     }
 
     /**
@@ -116,9 +128,25 @@ class ReceivingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $ball_number)
     {
-        //
+        $validate = $request->validate([
+            'supplier_id' => 'required|numeric',
+            'category_product_id' => 'required|numeric',
+            'target_qty' => 'required|numeric',
+            'price' => 'required|numeric',
+            'date' => 'required',
+            'note' => 'required'
+        ]);
+
+        $receiving = Receiving::where('ball_number', $ball_number)->first();
+
+        if ($receiving->open_qty > $request->target_qty) {
+            return redirect()->back()->with('fail', 'Jika TARGET QTY < OPEN QTY, hapus data Receiving secara manual!!. <a href="" class="text-decoration-underline">hapus sekarang!</a> ');
+        }
+
+        Receiving::where('ball_number', $ball_number)->update($validate);
+        return redirect('/transaction/manage-receiving/' . $ball_number);
     }
 
     /**

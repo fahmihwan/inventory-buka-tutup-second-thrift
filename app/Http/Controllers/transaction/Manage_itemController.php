@@ -9,6 +9,7 @@ use App\Models\Detail_brand;
 use App\Models\Item;
 use App\Models\Manage_item;
 use App\Models\Receiving;
+use Illuminate\Database\Capsule\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +45,7 @@ class Manage_itemController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'ball_number' => 'required',
             'category_product_id' => 'required|numeric',
@@ -96,7 +98,7 @@ class Manage_itemController extends Controller
             DB::rollBack();
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'berhasil di tambahkan');
     }
 
     /**
@@ -107,6 +109,7 @@ class Manage_itemController extends Controller
      */
     public function show($id)
     {
+
         $receiving = Receiving::with('category_product')
             ->where(['ball_number' => $id])->first();
 
@@ -153,12 +156,36 @@ class Manage_itemController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $manage_item = Manage_item::where('id', $id)->first();
+        $item = Item::where('id', $manage_item->id)->first();
+
+        $current_qty_item = $item->qty;
+        $current_qty_item -= $manage_item->qty;
+
+        try {
+            DB::beginTransaction();
+
+            // delete manage_item 
+            Manage_item::where('id', $manage_item->id)->delete();
+            Item::where('id', $item->id)->update([
+                'qty' => $current_qty_item,
+            ]);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+        }
+
+        // update item qty
+        return redirect()->back();
     }
 
 
     public function create_manage_receiving($ball_number)
     {
+
         $receiving =  Receiving::with(['category_product:id,name'])
             ->where('ball_number', $ball_number)->first();
 
@@ -171,11 +198,7 @@ class Manage_itemController extends Controller
             ->latest()->get();
 
 
-
-        // $category_brand = Category_brand::latest()->get();
-
-        // $detail_brand = Detail_brand::latest()->get();
-
+        // return $items;
         return view('pages.transaction.manage_item.create', [
             'receiving' => $receiving,
             'category_brand' => $category_brand,

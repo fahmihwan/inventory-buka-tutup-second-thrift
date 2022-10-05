@@ -9,7 +9,6 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Report Stock</h3>
-                {{-- <a href="/master/kategori-prouduk/create" class="btn btn-sm round  btn-primary mb-3">tambah data</a> --}}
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -22,61 +21,43 @@
         </div>
     </div>
 
+
     <section class="section">
         <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <form action="" class="d-flex">
-                            <div class="form-group me-3">
-                                <label for="">start date</label>
-                                <input type="date" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">end date</label>
-                                <input type="date" class="form-control">
-                            </div>
-                            <div class="d-flex align-items-center ms-3 mt-2">
-                                <button type="button" class="btn btn-primary" style="height: 40px">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                                <button type="reset" class="btn btn-info ms-2" style="height: 40px">
-                                    <i class="fa-solid fa-print"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="card-header p-3 d-flex justify-content-between">
+                <div>
+                    Kategori Produk
                 </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="section">
-        <div class="card">
-            <div class="card-header p-3">
-                Kategori Produk
+                <a href="/report/stock/print" class="btn btn-sm btn-primary ms-2" style="">
+                    <i class="fa-solid fa-print"></i>
+                </a>
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
-                            <th class="p-3">Kategori</th>
+                            <th class="p-3">Item</th>
+                            <th class="p-3">Brand</th>
+                            <th class="p-3">Category</th>
+                            <th class="p-3">Qty</th>
                             <th class="p-0">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($kategori as $data)
+                        @foreach ($items as $item)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $data->name }}</td>
+                                <td class="p-3">{{ $item->name }}</td>
+                                <td class="p-3">{{ $item->category_brand->name }}</td>
+                                <td class="p-3">{{ $item->category_product->name }}</td>
+                                <td class="p-3">{{ $item->qty }}</td>
                                 <td style="padding: 0px;">
-                                    <a href="/master/kategori-produk/{{ $data->id }}/edit"
-                                        class="btn badge btn-sm round btn-warning ">
-                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    <a href="/master/kategori-produk/{{ $item->id }}/print"
+                                        class="btn badge btn-sm round btn-info ">
+                                        <i class="fa-solid fa-print"></i>
                                     </a>
-                                    <form action="/master/kategori-produk/{{ $data->id }}" method="post"
+                                    {{-- <form action="/master/kategori-produk/{{ $data->id }}" method="post"
                                         class=" d-inline-block">
                                         @method('delete')
                                         @csrf
@@ -84,10 +65,10 @@
                                             onClick="return confirm('Are you sure?')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

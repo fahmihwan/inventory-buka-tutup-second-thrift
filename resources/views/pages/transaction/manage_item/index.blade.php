@@ -21,23 +21,35 @@
             </div>
         </div>
     </div>
+
+
     <section class="section">
         <div class="card">
             <div class="card-body p-2 ">
-                <ul class="nav mb-3 ">
-                    <li class="nav-item">
+                <div class="d-flex align-items-center justify-content-between">
+                    <ul class="nav mb-3 ">
+                        <li class="nav-item">
 
-                        <a class="nav-link fw-bold me-2 border-bottom border-3 border-primary"
-                            href="/transaction/manage-receiving/{{ $receiving->ball_number }}">
-                            List
-                            Item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link "
-                            href="/transaction/manage-receiving/{{ $receiving->ball_number }}/create">Tambah
-                            Item</a>
-                    </li>
-                </ul>
+                            <a class="nav-link fw-bold me-2 border-bottom border-3 border-primary"
+                                href="/transaction/manage-receiving/{{ $receiving->ball_number }}">
+                                List
+                                Item</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link "
+                                href="/transaction/manage-receiving/{{ $receiving->ball_number }}/create">Tambah
+                                Item</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="/transaction/receiving/{{ $receiving->ball_number }}/edit" class="nav-link text-warning">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="/transaction/receiving" class="nav-link"> <i class="fa-solid fa-arrow-left"></i>
+                            Kembali</a>
+                    </div>
+
+                </div>
                 <div class="m-2">
                     <div class="row ">
                         <div class="col-6">
@@ -105,7 +117,8 @@
                                 <td class="p-1"> {{ $item->item->category_brand->name }}</td>
                                 <td class="p-1"> {{ $item->qty }}</td>
                                 <td>
-                                    <form action="" method="post" class=" d-inline-block">
+                                    <form action="/transaction/manage-receiving/{{ $item->id }}" method="post"
+                                        class=" d-inline-block">
                                         @method('delete')
                                         @csrf
                                         <button class="btn badge  btn-sm round btn-danger"

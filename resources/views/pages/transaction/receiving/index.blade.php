@@ -43,7 +43,7 @@
                     </thead>
                     <tbody>
                         @foreach ($receiving_data as $data)
-                            <tr class="p-0 m-0 ">
+                            <tr class="p-0 m-0 @if ($data->open_qty != $data->target_qty) table-danger @endif ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
                                 <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->ball_number }}</td>

@@ -9,7 +9,6 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Report Issuing</h3>
-                {{-- <a href="/master/kategori-prouduk/create" class="btn btn-sm round  btn-primary mb-3">tambah data</a> --}}
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -30,17 +29,17 @@
                         <form action="" class="d-flex">
                             <div class="form-group me-3">
                                 <label for="">start date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">end date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" required class="form-control">
                             </div>
                             <div class="d-flex align-items-center ms-3 mt-2">
                                 <button type="button" class="btn btn-primary" style="height: 40px">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
-                                <button type="reset" class="btn btn-info ms-2" style="height: 40px">
+                                <button type="submit" class="btn btn-info ms-2" style="height: 40px">
                                     <i class="fa-solid fa-print"></i>
                                 </button>
                             </div>
@@ -62,32 +61,37 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
-                            <th class="p-3">Kategori</th>
+                            <th class="p-3">no_referensi</th>
+                            <th class="p-3">customer</th>
+                            <th class="p-3">Alamat</th>
+                            <th class="p-3">items</th>
+                            {{-- <th class="p-3">Qty</th> --}}
                             <th class="p-0">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($kategori as $data)
+                        @foreach ($datas as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $data->name }}</td>
+                                <td class="p-3">{{ $data->no_referensi }}</td>
+                                <td class="p-3">{{ $data->customer->name }}</td>
+                                <td class="p-3">{{ $data->customer->address }}</td>
+                                <td class="p-3">
+                                    <ul>
+                                        @foreach ($data->detail_issuings as $detail)
+                                            <li> {{ $detail->item->name }} - {{ $detail->item->qty }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+
                                 <td style="padding: 0px;">
-                                    <a href="/master/kategori-produk/{{ $data->id }}/edit"
-                                        class="btn badge btn-sm round btn-warning ">
-                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    <a href="/master/kategori-produk/{{ $data->id }}/print"
+                                        class="btn badge btn-sm round btn-info ">
+                                        <i class="fa-solid fa-print"></i>
                                     </a>
-                                    <form action="/master/kategori-produk/{{ $data->id }}" method="post"
-                                        class=" d-inline-block">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn badge  btn-sm round btn-danger"
-                                            onClick="return confirm('Are you sure?')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -30,17 +30,17 @@
                         <form action="" class="d-flex">
                             <div class="form-group me-3">
                                 <label for="">start date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">end date</label>
-                                <input type="date" class="form-control">
+                                <input type="date" required class="form-control">
                             </div>
                             <div class="d-flex align-items-center ms-3 mt-2">
                                 <button type="button" class="btn btn-primary" style="height: 40px">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
-                                <button type="reset" class="btn btn-info ms-2" style="height: 40px">
+                                <button type="submit" class="btn btn-info ms-2" style="height: 40px">
                                     <i class="fa-solid fa-print"></i>
                                 </button>
                             </div>
@@ -51,48 +51,49 @@
         </div>
     </section>
 
-
     <section class="section">
         <div class="card">
             <div class="card-header p-3">
-                Kategori Produk
+                List Data Ball
             </div>
-            <div class="card-body">
+            <div class="card-body ">
                 <table class='table table-striped' id="table1">
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
-                            <th class="p-3">Kategori</th>
+                            <th class="p-3">Date</th>
+                            <th class="p-3">Ball Number</th>
+                            {{-- <th class="p-3">Supplier</th> --}}
+                            <th class="p-3">Category </th>
+                            <th class="p-3">Target Qty</th>
+                            <th class="p-3">Open Qty</th>
+                            <th class="p-3">Total Price</th>
                             <th class="p-0">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($kategori as $data)
+                        @foreach ($receiving_data as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
-                                <td class="p-3">{{ $data->name }}</td>
+                                <td class="p-3">{{ $data->date }}</td>
+                                <td class="p-3">{{ $data->ball_number }}</td>
+                                {{-- <td class="p-3">{{ $data->supplier->name }}</td> --}}
+                                <td class="p-3">{{ $data->category_product->name }}</td>
+                                <td class="p-3">{{ $data->target_qty }}</td>
+                                <td class="p-3">{{ $data->open_qty }}</td>
+                                <td class="p-3">{{ 'Rp' . $data->price }}</td>
                                 <td style="padding: 0px;">
-                                    <a href="/master/kategori-produk/{{ $data->id }}/edit"
-                                        class="btn badge btn-sm round btn-warning ">
-                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    <a href="/transaction/manage-receiving/{{ $data->ball_number }}"
+                                        class="btn badge btn-sm round btn-info ">
+                                        <i class="fa-regular fa-folder-open"></i>
                                     </a>
-                                    <form action="/master/kategori-produk/{{ $data->id }}" method="post"
-                                        class=" d-inline-block">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn badge  btn-sm round btn-danger"
-                                            onClick="return confirm('Are you sure?')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-
     </section>
 @endsection
 

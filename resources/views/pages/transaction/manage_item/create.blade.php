@@ -1,7 +1,8 @@
 @extends('component.main')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" /> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('container')
@@ -27,6 +28,11 @@
         @if (session()->has('fail'))
             <div class="alert alert-danger mb-4">
                 <i class="fa-solid fa-bell"></i> {!! session('fail') !!}
+            </div>
+        @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success mb-4">
+                <i class="fa-solid fa-bell"></i> {!! session('success') !!}
             </div>
         @endif
 
@@ -103,12 +109,13 @@
                                                 <div class="form-group">
                                                     <label for="valid-state">Nama Item</label>
                                                     <div class="form-group">
-                                                        <select name="name" class="choices form-select">
+                                                        <select name="name"
+                                                            class="choices form-select js-example-basic-single-1">
                                                             @foreach ($item_name as $detail)
                                                                 <option value="{{ $detail->id }}">
                                                                     {{ $detail->name }} &nbsp; &nbsp;
-                                                                    {{-- [ Kategori Brand
-                                                                    {{ $detail->category_brand->name }} ] --}}
+                                                                    [
+                                                                    {{ $detail->category_brand->name }} ]
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -153,63 +160,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--Basic Modal -->
-                {{-- <div class="modal fade text-left" id="default" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <form action="/master/detail-brand" method="post" class="form form-vertical">
-                            @csrf
-                            <div class="modal-content">
-                                <div class="modal-header p-2">
-                                    <h5 class="modal-title" id="myModalLabel1">Input
-                                        Detail Brand</h5>
-                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        <i data-feather="x"></i>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-body">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="valid-state">Detail
-                                                        Brand</label>
-                                                    <input type="text"
-                                                        class="form-control @error('record') is-invalid @enderror"
-                                                        id="valid-state" placeholder="Valid" value="{{ old('name') }}"
-                                                        required name="name">
-                                                    @error('name')
-                                                        <div class="valid-feedback">
-                                                            <i class="bx bx-radio-circle"></i>
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer p-2">
-                                    <button type="button" class="btn" data-bs-dismiss="modal">
-                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Close</span>
-                                    </button>
-                                    <button type="submit" class="btn btn-primary ml-1">
-                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Accept</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div> --}}
-                {{-- end Modal --}}
-                {{-- <div class="col-md-6 col-12">
-
-                        </div> --}}
             </div>
         </section>
 
@@ -218,5 +168,10 @@
 
 
 @section('script')
-    <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="{{ asset('assets/vendors/choices.js/choices.min.js') }}"></script> --}}
+    <script>
+        $('.js-example-basic-single-1').select2()
+    </script>
 @endsection

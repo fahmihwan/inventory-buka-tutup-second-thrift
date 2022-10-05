@@ -53,5 +53,6 @@ Route::resource('transaction/detail_issuing', Detail_issuingController::class);
 
 
 Route::get('report/stock', [ReportStockController::class, 'index']);
+Route::get('report/stock/print', [ReportStockController::class, 'print_stock']);
 Route::get('report/issuing', [ReportIssuingController::class, 'index']);
 Route::get('report/receiving', [ReportReceivingController::class, 'index']);
