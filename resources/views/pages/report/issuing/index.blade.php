@@ -20,28 +20,42 @@
             </div>
         </div>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger  m-1">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <section class="section">
         <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-4">
-                        <form action="" class="d-flex">
+                        <form action="" method="GET" class="d-flex">
                             <div class="form-group me-3">
                                 <label for="">start date</label>
-                                <input type="date" required class="form-control">
+                                <input type="date" name="start_date" required class="form-control"
+                                    value="{{ request('start_date') }}">
                             </div>
                             <div class="form-group">
                                 <label for="">end date</label>
-                                <input type="date" required class="form-control">
+                                <input type="date" name="end_date" required class="form-control"
+                                    value="{{ request('end_date') }}">
                             </div>
                             <div class="d-flex align-items-center ms-3 mt-2">
-                                <button type="button" class="btn btn-primary" style="height: 40px">
+                                <button type="submit" class="btn btn-primary" style="height: 40px">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
-                                <button type="submit" class="btn btn-info ms-2" style="height: 40px">
+                                <button name="print" value="ok" class="btn btn-info ms-2" style="height: 40px">
                                     <i class="fa-solid fa-print"></i>
                                 </button>
+                                <a href="/report/issuing" class="btn btn-warning ms-2" style="height: 40px">
+                                    <i class="fas fa-sync-alt"></i>
+                                </a>
                             </div>
                         </form>
                     </div>
@@ -61,11 +75,11 @@
                     <thead>
                         <tr>
                             <th class="p-3">No</th>
+                            <th class="p-3">Tanggal</th>
                             <th class="p-3">no_referensi</th>
                             <th class="p-3">customer</th>
                             <th class="p-3">Alamat</th>
-                            <th class="p-3">items</th>
-                            {{-- <th class="p-3">Qty</th> --}}
+                            <th class="p-3">Items</th>
                             <th class="p-0">Action</th>
                         </tr>
                     </thead>
@@ -73,17 +87,17 @@
                         @foreach ($datas as $data)
                             <tr class="p-0 m-0 ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
+                                <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->no_referensi }}</td>
                                 <td class="p-3">{{ $data->customer->name }}</td>
                                 <td class="p-3">{{ $data->customer->address }}</td>
                                 <td class="p-3">
                                     <ul>
                                         @foreach ($data->detail_issuings as $detail)
-                                            <li> {{ $detail->item->name }} - {{ $detail->item->qty }}</li>
+                                            <li> {{ $detail->item->name }} - {{ $detail->qty }}</li>
                                         @endforeach
                                     </ul>
                                 </td>
-
                                 <td style="padding: 0px;">
                                     <a href="/master/kategori-produk/{{ $data->id }}/print"
                                         class="btn badge btn-sm round btn-info ">

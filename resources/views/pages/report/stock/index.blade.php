@@ -57,15 +57,6 @@
                                         class="btn badge btn-sm round btn-info ">
                                         <i class="fa-solid fa-print"></i>
                                     </a>
-                                    {{-- <form action="/master/kategori-produk/{{ $data->id }}" method="post"
-                                        class=" d-inline-block">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn badge  btn-sm round btn-danger"
-                                            onClick="return confirm('Are you sure?')">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach

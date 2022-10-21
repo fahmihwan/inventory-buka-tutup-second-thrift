@@ -40,28 +40,33 @@
 
 <body>
     <div class="header">
-        <h4>Report Barang</h4> <br>
+        <h4>Report Receiving </h4> <br>
         <h6 style="font-size: 12px;">Buka Tutup Second</h6>
         <p style="font-size: 12px">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
+        <p style="margin: 5px">Periode : {{ request('start_date') }} sampai {{ request('end_date') }}</p>
     </div>
     <div class="container">
         <table>
             <tr>
-            <tr>
                 <th>No</th>
-                <th>Item</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Qty</th>
+                <th>Date</th>
+                <th>Ball Number</th>
+                <th>Supplier</th>
+                <th>Category </th>
+                <th>Target Qty</th>
+                <th>Open Qty</th>
+                <th>Total Price</th>
             </tr>
-            </tr>
-            @foreach ($items as $item)
+            @foreach ($datas as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->category_brand->name }}</td>
-                    <td>{{ $item->category_product->name }}</td>
-                    <td>{{ $item->qty }}</td>
+                    <td>{{ $data->date }}</td>
+                    <td>{{ $data->ball_number }}</td>
+                    <td>{{ $data->supplier->name }}</td>
+                    <td>{{ $data->category_product->name }}</td>
+                    <td>{{ $data->target_qty }}</td>
+                    <td>{{ $data->open_qty }}</td>
+                    <td>{{ 'Rp' . $data->price }}</td>
                 </tr>
             @endforeach
 

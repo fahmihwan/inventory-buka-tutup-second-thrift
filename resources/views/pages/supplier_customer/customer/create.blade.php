@@ -13,9 +13,9 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">kategori produk </li>
-                        <li class="breadcrumb-item active" aria-current="page">create </li>
+                        <li class="breadcrumb-item"><a href="">Supplier - Customer</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">List Customer </li>
+                        <li class="breadcrumb-item active" aria-current="page">Create </li>
                     </ol>
                 </nav>
             </div>

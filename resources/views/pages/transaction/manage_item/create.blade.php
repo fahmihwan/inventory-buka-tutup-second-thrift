@@ -38,16 +38,27 @@
 
         <div class="card">
             <div class="card-body p-2 ">
-                <ul class="nav mb-3 ">
-                    <li class="nav-item">
-                        <a class="nav-link me-2" href="/transaction/manage-receiving/{{ $receiving->ball_number }}">List
-                            Item</a>
-                    </li>
-                    <li class="nav-item fw-bold border-bottom border-3 border-primary">
-                        <a class="nav-link" href="/transaction/manage-receiving/{{ $receiving->ball_number }}/create">Tambah
-                            Item</a>
-                    </li>
-                </ul>
+                <div class="d-flex justify-content-between align-items-center">
+                    <ul class="nav mb-3 ">
+                        <li class="nav-item">
+                            <a class="nav-link me-2" href="/transaction/manage-receiving/{{ $receiving->ball_number }}">List
+                                Item</a>
+                        </li>
+                        <li class="nav-item fw-bold border-bottom border-3 border-primary">
+                            <a class="nav-link"
+                                href="/transaction/manage-receiving/{{ $receiving->ball_number }}/create">Tambah
+                                Item</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="/transaction/receiving/{{ $receiving->ball_number }}/edit" class="nav-link text-warning">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="/transaction/receiving" class="nav-link"> <i class="fa-solid fa-arrow-left"></i>
+                            Kembali</a>
+                    </div>
+                </div>
+
                 <div class="m-2">
                     <div class="row ">
                         <div class="col-6">

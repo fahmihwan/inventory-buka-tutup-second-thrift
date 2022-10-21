@@ -20,6 +20,7 @@ class IssuingController extends Controller
      */
     public function index()
     {
+
         $data = Issuing::with(['customer:id,name,address', 'detail_issuings'])
             ->withSum('detail_issuings', 'qty')
             ->latest()->get();
@@ -137,7 +138,6 @@ class IssuingController extends Controller
      */
     public function show($id)
     {
-
 
         $data = Issuing::with([
             'customer',

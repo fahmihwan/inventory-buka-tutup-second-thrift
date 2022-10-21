@@ -75,7 +75,7 @@
                                                 <input type="number" name="qty" class="form-control me-3"
                                                     style="width: 60px" min="1" max="10" value="0"
                                                     autocomplete="off">
-                                                <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                <button id="btn-plus" type="submit" class="btn btn-primary me-1 mb-1">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
@@ -197,10 +197,13 @@
             $('.js-example-basic-single-1').select2();
             $('.js-example-basic-single-2').select2();
 
+            $('#btn-plus').attr('disabled', true);
+
             $('.js-example-basic-single-1').change(function(e) {
                 clearOption()
                 getProduct($(this).val())
                 $('#jml-item').html(` <span class="text-danger">  null </span>`)
+                $('#btn-plus').attr('disabled', true);
             })
 
             function getData(url) {
@@ -240,6 +243,7 @@
                                         data.data.forEach(e => {
                                             $('#jml-item').html(e.qty)
                                         })
+                                        $('#btn-plus').attr('disabled', false);
                                     }
                                 }
                             })

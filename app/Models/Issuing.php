@@ -21,4 +21,13 @@ class Issuing extends Model
     {
         return $this->hasMany(Detail_Issuing::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        return  $query->with([
+            'detail_issuings.item.category_brand',
+            'detail_issuings.item.category_product',
+            'customer'
+        ])->whereDate('date', '>=', $filters['start_date'])->whereDate('date', '<=', $filters['end_date']);
+    }
 }

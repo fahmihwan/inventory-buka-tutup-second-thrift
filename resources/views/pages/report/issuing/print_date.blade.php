@@ -40,28 +40,35 @@
 
 <body>
     <div class="header">
-        <h4>Report Barang</h4> <br>
+        <h4>Report Issuing </h4> <br>
         <h6 style="font-size: 12px;">Buka Tutup Second</h6>
         <p style="font-size: 12px">Jl Godean, Km 7 Semarangan, Sleman Daerah Istimewa Yogyakarta Kode Pos 55285</p>
+        <p style="margin: 5px">Periode : {{ request('start_date') }} sampai {{ request('end_date') }}</p>
     </div>
     <div class="container">
         <table>
             <tr>
-            <tr>
                 <th>No</th>
-                <th>Item</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Qty</th>
+                <th>Tanggal</th>
+                <th>no_referensi</th>
+                <th>customer</th>
+                <th>Alamat</th>
+                <th>items</th>
             </tr>
-            </tr>
-            @foreach ($items as $item)
+            @foreach ($items as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->category_brand->name }}</td>
-                    <td>{{ $item->category_product->name }}</td>
-                    <td>{{ $item->qty }}</td>
+                    <td>{{ $data->date }}</td>
+                    <td>{{ $data->no_referensi }}</td>
+                    <td>{{ $data->customer->name }}</td>
+                    <td>{{ $data->customer->address }}</td>
+                    <td style="padding-left: 20px;">
+                        <ul>
+                            @foreach ($data->detail_issuings as $detail)
+                                <li> {{ $detail->item->name }} - {{ $detail->qty }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
                 </tr>
             @endforeach
 

@@ -13,9 +13,9 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Supplier </li>
-                        <li class="breadcrumb-item active" aria-current="page">create </li>
+                        <li class="breadcrumb-item"><a href="">Supplier - Customer</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">List Supplier </li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h4 class="card-title">Form Edit Customer</h4>
+                        <h4 class="card-title">Form Edit Supplier</h4>
                         <a href="/supplier-customer/supplier" class=" me-1 mb-1">
                             <i class="fa-solid fa-arrow-left"></i>
                             Kembali</a>

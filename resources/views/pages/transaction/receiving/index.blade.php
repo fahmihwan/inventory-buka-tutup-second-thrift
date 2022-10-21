@@ -43,14 +43,20 @@
                     </thead>
                     <tbody>
                         @foreach ($receiving_data as $data)
-                            <tr class="p-0 m-0 @if ($data->open_qty != $data->target_qty) table-danger @endif ">
+                            {{-- <tr class="p-0 m-0 @if ($data->open_qty != $data->target_qty) table-danger @endif "> --}}
+                            <tr class="p-0 m-0  ">
                                 <td class="p-3">{{ $loop->iteration }}</td>
                                 <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->ball_number }}</td>
                                 {{-- <td class="p-3">{{ $data->supplier->name }}</td> --}}
                                 <td class="p-3">{{ $data->category_product->name }}</td>
                                 <td class="p-3">{{ $data->target_qty }}</td>
-                                <td class="p-3">{{ $data->open_qty }}</td>
+                                <td class="p-3">
+                                    <span
+                                        class="badge @if ($data->open_qty != $data->target_qty) bg-warning @else bg-success @endif">
+                                        {{ $data->open_qty }}
+                                    </span>
+                                </td>
                                 <td class="p-3">{{ 'Rp' . $data->price }}</td>
                                 <td style="padding: 0px;">
                                     <a href="/transaction/manage-receiving/{{ $data->ball_number }}"

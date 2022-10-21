@@ -20,4 +20,14 @@ class Receiving extends Model
     {
         return $this->belongsTo(Category_product::class);
     }
+
+    public function scopeFilter($query, array $filters)
+    {
+        return  $query->with([
+            'supplier:id,name',
+            'category_product:id,name'
+        ])
+            ->whereDate('date', '>=', $filters['start_date'])
+            ->whereDate('date', '<=', $filters['end_date']);
+    }
 }
