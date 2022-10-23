@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\transaction\IssuingController;
@@ -35,15 +36,19 @@ Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'authenticate']);
 Route::post('/authenticate/logout', [AuthController::class, 'logout']);
 
-// Route::middleware(['Role'])->group()
+Route::get('create', [Controller::class, 'create']);
+Route::post('store', [Controller::class, 'store']);
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/setting/account/list-account', [AuthController::class, 'list_account']);
     Route::get('/setting/account/create', [AuthController::class, 'register']);
-    Route::post('/setting/account/store', [AuthController::class, 'store']);
 });
+Route::post('/setting/account/store', [AuthController::class, 'store']);
+
+
+
+
 
 Route::resource('supplier-customer/supplier', SupplierController::class);
 Route::resource('supplier-customer/customer', CustomerController::class);
@@ -54,7 +59,6 @@ Route::resource('master/kategori-brand', KategoriBrandController::class);
 
 Route::resource('master/item', ItemController::class);
 // Route::post('master/item/store_detail_brand', [ItemController::class, 'store_detail_brand']);
-
 Route::resource('transaction/receiving', ReceivingController::class);
 Route::resource('transaction/manage-receiving', Manage_itemController::class);
 Route::get('transaction/manage-receiving/{ball_number}/create', [Manage_itemController::class, 'create_manage_receiving']);
@@ -68,9 +72,12 @@ Route::resource('transaction/detail_issuing', Detail_issuingController::class);
 // report
 Route::get('report/stock', [ReportStockController::class, 'index']);
 Route::get('report/stock/print', [ReportStockController::class, 'print_stock']);
+Route::get('report/stock/{id}/print', [ReportStockController::class, 'print_first']);
+
+
 
 Route::get('report/issuing', [ReportIssuingController::class, 'index']);
-Route::get('report/issuing/{start_date}/{end_date}', [ReportIssuingController::class, 'search_date']);
+Route::get('report/issuing/{id}/print', [ReportIssuingController::class, 'print_first']);
 
-Route::get('report/issuing/print', [ReportIssuingController::class, 'print_issuing']);
 Route::get('report/receiving', [ReportReceivingController::class, 'index']);
+Route::get('report/receiving/{id}/print', [ReportReceivingController::class, 'print_first']);

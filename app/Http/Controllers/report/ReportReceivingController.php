@@ -5,6 +5,7 @@ namespace App\Http\Controllers\report;
 use App\Http\Controllers\Controller;
 use App\Models\Receiving;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dflydev\DotAccessData\Data;
 
 class ReportReceivingController extends Controller
 {
@@ -32,5 +33,19 @@ class ReportReceivingController extends Controller
         return view('pages.report.receiving.index', [
             'datas' => $data,
         ]);
+    }
+
+
+    public function print_first($id)
+    {
+        $data = Receiving::with(['supplier:id,name', 'category_product:id,name'])
+            ->where('id', $id)->first();
+
+
+        $pdf = PDF::loadview('pages.report.receiving.print_first', [
+            'item' => $data
+        ]);
+
+        return $pdf->download('laporan-receiving-pdf');
     }
 }

@@ -104,9 +104,9 @@
                                 <td class="p-2">{{ $data->open_qty }}</td>
                                 <td class="p-2">{{ 'Rp' . $data->price }}</td>
                                 <td style="padding: 0px;">
-                                    <a href="/transaction/manage-receiving/{{ $data->ball_number }}"
+                                    <a href="/report/receiving/{{ $data->id }}/print"
                                         class="btn badge btn-sm round btn-info ">
-                                        <i class="fa-regular fa-folder-open"></i>
+                                        <i class="fas fa-print"></i>
                                     </a>
                                 </td>
                             </tr>

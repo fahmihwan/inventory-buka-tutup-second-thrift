@@ -59,6 +59,7 @@ class DashboardController extends Controller
             ->groupBy('year')
             ->first();
 
+
         $sales_today = Issuing::with([
             'detail_issuings.item.category_brand',
             'detail_issuings.item.category_product',
@@ -73,8 +74,8 @@ class DashboardController extends Controller
         return view('pages.dashboard.index', [
             'orders' => $orders,
             'sales' => $sales,
-            'total_sales' => $total_sales,
-            'total_orders' => $total_order,
+            'total_sales' => empty($total_sales->qty) ? 0 : $total_sales->qty,
+            'total_orders' => empty($total_order->qty) ? 0 : $total_order->qty,
             'sales_today' => $sales_today,
             'top_max_item' => $top_max_items
         ]);

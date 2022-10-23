@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('category_product_id');
             $table->integer('qty');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

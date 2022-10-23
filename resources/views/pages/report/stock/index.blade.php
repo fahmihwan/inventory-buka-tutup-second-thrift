@@ -53,7 +53,7 @@
                                 <td class="p-3">{{ $item->category_product->name }}</td>
                                 <td class="p-3">{{ $item->qty }}</td>
                                 <td style="padding: 0px;">
-                                    <a href="/master/kategori-produk/{{ $item->id }}/print"
+                                    <a href="/report/stock/{{ $item->id }}/print"
                                         class="btn badge btn-sm round btn-info ">
                                         <i class="fa-solid fa-print"></i>
                                     </a>

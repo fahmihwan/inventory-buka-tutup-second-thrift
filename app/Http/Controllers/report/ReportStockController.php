@@ -20,18 +20,30 @@ class ReportStockController extends Controller
         ]);
     }
 
+    public function print_first($id)
+    {
+        $item = Item::with(['category_brand', 'category_product'])
+            ->where('id', $id)->first();
+
+        $pdf = PDF::loadview('pages.report.stock.print_first', [
+            'item' => $item
+        ]);
+        return $pdf->download('laporan-stok-pdf');
+    }
+
+
+
     public function print_stock()
     {
         $item = Item::with(['category_brand', 'category_product'])->get();
 
-
-        // return view('pages.report.stock.print', [
+        return view('pages.report.issuing.index', [
+            'item' => $item
+        ]);
+        // $pdf = PDF::loadview('pages.report.stock.print', [
         //     'items' => $item
         // ]);
 
-        $pdf = PDF::loadview('pages.report.stock.print', [
-            'items' => $item
-        ]);
-        return $pdf->download('laporan-pegawai-pdf');
+        // return $pdf->download('laporan-stok-pdf');
     }
 }

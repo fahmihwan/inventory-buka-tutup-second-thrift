@@ -131,7 +131,7 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        Item::where('id', $id)->delete();
+        Item::where('id', $id)->trashed();
         return redirect('master/item');
     }
 

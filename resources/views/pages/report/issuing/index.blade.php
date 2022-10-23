@@ -99,7 +99,7 @@
                                     </ul>
                                 </td>
                                 <td style="padding: 0px;">
-                                    <a href="/master/kategori-produk/{{ $data->id }}/print"
+                                    <a href="/report/issuing/{{ $data->id }}/print"
                                         class="btn badge btn-sm round btn-info ">
                                         <i class="fa-solid fa-print"></i>
                                     </a>

@@ -34,4 +34,16 @@ class ReportIssuingController extends Controller
             'datas' => $data
         ]);
     }
+    public function print_first($id)
+    {
+
+        $data =  Issuing::with(['detail_issuings.item.category_brand', 'detail_issuings.item.category_product', 'customer'])
+            ->where('id', $id)->first();
+
+        $pdf = PDF::loadview('pages.report.issuing.print_first', [
+            'item' => $data
+        ]);
+
+        return $pdf->download('laporan-issuing-pdf');
+    }
 }

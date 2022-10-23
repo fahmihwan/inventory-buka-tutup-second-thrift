@@ -52,7 +52,7 @@
                             <div class='px-3 py-3 d-flex justify-content-between'>
                                 <h3 class='card-title'>ORDERS {{ date('Y') }}</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>{{ $total_orders->qty }} </p>
+                                    <p>{{ $total_orders }} </p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
@@ -69,7 +69,7 @@
                             <div class='px-3 py-3 d-flex justify-content-between'>
                                 <h3 class='card-title'>Sales {{ date('Y') }}</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>{{ $total_sales->qty }} </p>
+                                    <p>{{ $total_sales }} </p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
