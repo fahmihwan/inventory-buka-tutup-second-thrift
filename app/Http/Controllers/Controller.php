@@ -17,8 +17,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 
-    public function create()
-    {
-        return view('welcome');
-    }
+    // public function create()
+    // {
+    //     return view('welcome');
+    // }
 }

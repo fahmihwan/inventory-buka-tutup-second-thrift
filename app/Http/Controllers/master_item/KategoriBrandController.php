@@ -40,7 +40,7 @@ class KategoriBrandController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:category_brands',
+            'name' => 'required',
         ]);
 
         Category_brand::create($data);
@@ -86,7 +86,7 @@ class KategoriBrandController extends Controller
     {
 
         $data = $request->validate([
-            'name' => 'required|unique:category_brands',
+            'name' => 'required',
         ]);
 
         Category_brand::where('id', $id)->update($data);
@@ -101,6 +101,7 @@ class KategoriBrandController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         Category_brand::where('id', $id)->delete();
         return redirect('/master/detail-brand');
     }

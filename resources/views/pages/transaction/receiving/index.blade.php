@@ -33,7 +33,7 @@
                             <th class="p-3">No</th>
                             <th class="p-3">Date</th>
                             <th class="p-3">Ball Number</th>
-                            {{-- <th class="p-3">Supplier</th> --}}
+                            <th class="p-3">Supplier</th>
                             <th class="p-3">Category </th>
                             <th class="p-3">Target Qty</th>
                             <th class="p-3">Open Qty</th>
@@ -48,7 +48,7 @@
                                 <td class="p-3">{{ $loop->iteration }}</td>
                                 <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->ball_number }}</td>
-                                {{-- <td class="p-3">{{ $data->supplier->name }}</td> --}}
+                                <td class="p-3">{{ $data->supplier->name }}</td>
                                 <td class="p-3">{{ $data->category_product->name }}</td>
                                 <td class="p-3">{{ $data->target_qty }}</td>
                                 <td class="p-3">

@@ -62,6 +62,13 @@ class AuthController extends Controller
         return redirect('setting/account/list-account');
     }
 
+    public function destroy($id)
+    {
+
+        User::where('id', $id)->delete();
+    }
+
+
     public function logout(Request $request)
     {
         Auth::logout();

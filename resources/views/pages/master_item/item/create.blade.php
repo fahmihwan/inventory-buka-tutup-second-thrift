@@ -38,29 +38,11 @@
                                         <div class="col-12">
                                             <div class="form-group ">
                                                 <label for="valid-state ">Nama Item</label>
-                                                <div class="form-group d-flex">
-                                                    <div style="width: 80%">
-                                                        {{-- <select name="detail_brand_id" class="choices form-select">
-                                                            <option value="{{ $data_edit->detail_brand->id }}">
-                                                                {{ $data_edit->detail_brand->name }}</option>
-                                                            @foreach ($detail_brand as $detail)
-                                                                <option value="{{ $detail->id }}">{{ $detail->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select> --}}
-                                                        <input type="text" name="name" class="form-control "
-                                                            id="valid-state" placeholder="" value="" required>
+                                                <div class="form-group">
 
-                                                    </div>
-                                                    <div style="width: 18%">
-                                                        <!-- Button trigger for basic modal -->
-                                                        <button type="button"
-                                                            class="btn rounded-none rounded-end  btn-warning block"
-                                                            data-bs-toggle="modal" data-bs-target="#default"
-                                                            style="width: 100%; height: 100%;">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                        </button>
-                                                    </div>
+                                                    <input type="text" name="name" class="form-control "
+                                                        id="valid-state" placeholder="" value="" required>
+
 
                                                 </div>
                                             </div>
@@ -116,57 +98,6 @@
 
         </div>
     </section>
-    <!--Basic Modal -->
-    <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <form action="/master/item/store_detail_brand" method="post" class="form form-vertical">
-                @csrf
-                <div class="modal-content">
-                    <div class="modal-header p-2">
-                        <h5 class="modal-title" id="myModalLabel1">Input
-                            Detail Brand</h5>
-                        <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="valid-state">Detail
-                                            Brand</label>
-                                        <input type="text" class="form-control @error('record') is-invalid @enderror"
-                                            id="valid-state" placeholder="Detail Brand" value="{{ old('name') }}"
-                                            required name="name">
-                                        @error('name')
-                                            <div class="valid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer p-2">
-                        <button type="button" class="btn" data-bs-dismiss="modal">
-                            <i class="bx bx-x d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Close</span>
-                        </button>
-                        <button type="submit" class="btn btn-primary ml-1">
-                            <i class="bx bx-check d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">Accept</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    {{-- end Modal --}}
 @endsection
 
 

@@ -48,10 +48,11 @@
                                 <td class="p-3">{{ $user->role }}</td>
                                 <td class="p-3">{{ $user->created_at }}</td>
                                 <td class="p-0">
-                                    <form action="/master/item/{{ $user->id }}" method="post" class=" d-inline-block">
+                                    <form action="/setting/account/{{ $user->id }}/destroy" method="POST"
+                                        class=" d-inline-block">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn badge  btn-sm round btn-danger"
+                                        <button type="submit" class="btn badge  btn-sm round btn-danger"
                                             onClick="return confirm('Are you sure?')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>

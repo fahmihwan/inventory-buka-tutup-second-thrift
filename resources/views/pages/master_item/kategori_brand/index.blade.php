@@ -104,11 +104,11 @@
                                         class="btn badge btn-sm round btn-warning ">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <form action="/master/kategori-brand/{{ $brand->id }}" method="post"
+                                    <form action="/master/kategori-brand/{{ $brand->id }}" method="POST"
                                         class=" d-inline-block">
                                         @method('delete')
                                         @csrf
-                                        <button class="btn badge  btn-sm round btn-danger"
+                                        <button type="submit" class="btn badge  btn-sm round btn-danger"
                                             onClick="return confirm('Are you sure?')">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>

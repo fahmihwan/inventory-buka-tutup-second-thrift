@@ -43,7 +43,7 @@ class KategoriProukController extends Controller
     public function store(Request $request)
     {
         $validated =  $request->validate([
-            'name' => 'required|unique:category_products',
+            'name' => 'required',
         ]);
 
         Category_product::create($validated);
@@ -86,7 +86,7 @@ class KategoriProukController extends Controller
     public function update(Request $request, $id)
     {
         $validated =  $request->validate([
-            'name' => 'required|unique:category_products',
+            'name' => 'required',
         ]);
 
 

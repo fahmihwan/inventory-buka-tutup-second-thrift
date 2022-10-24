@@ -12,17 +12,17 @@ class Item extends Model
 
     protected $guarded = ['id'];
 
-
+    protected $dates = ['deleted_at'];
 
     public function category_brand()
     {
-        return $this->belongsTo(Category_brand::class);
+        return $this->belongsTo(Category_brand::class)->withTrashed();
     }
 
 
     public function category_product()
     {
-        return $this->belongsTo(Category_product::class);
+        return $this->belongsTo(Category_product::class)->withTrashed();
     }
 
     //   public function item()

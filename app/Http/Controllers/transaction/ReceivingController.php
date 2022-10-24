@@ -19,6 +19,10 @@ class ReceivingController extends Controller
     {
         $data = Receiving::with(['supplier:id,name', 'category_product:id,name'])
             ->latest()->get();
+
+
+
+
         return view('pages.transaction.receiving.index', [
             'receiving_data' => $data
         ]);

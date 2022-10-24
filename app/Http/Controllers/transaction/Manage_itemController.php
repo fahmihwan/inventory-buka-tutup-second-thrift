@@ -5,11 +5,11 @@ namespace App\Http\Controllers\transaction;
 use App\Http\Controllers\Controller;
 use App\Models\Category_brand;
 
-use App\Models\Detail_brand;
+// use App\Models\Detail_brand;
 use App\Models\Item;
 use App\Models\Manage_item;
 use App\Models\Receiving;
-use Illuminate\Database\Capsule\Manager;
+// use Illuminate\Database\Capsule\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -109,7 +109,6 @@ class Manage_itemController extends Controller
      */
     public function show($id)
     {
-
         $receiving = Receiving::with('category_product')
             ->where(['ball_number' => $id])->first();
 
