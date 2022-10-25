@@ -14,7 +14,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List kategori produk </li>
+                        <li class="breadcrumb-item active" aria-current="page">List Receiving </li>
                     </ol>
                 </nav>
             </div>

@@ -21,9 +21,11 @@
                     <div class="d-none d-md-block d-lg-inline-block">{{ Auth::user()->name }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="/setting/account/list-account"><i data-feather="user"></i>
-                        Account</a>
-                    <div class="dropdown-divider"></div>
+                    @if (Auth::user()->role == 'admin')
+                        <a class="dropdown-item" href="/setting/account/list-account"><i data-feather="user"></i>
+                            Account</a>
+                        <div class="dropdown-divider"></div>
+                    @endif
                     <form action="/authenticate/logout" method="post" class=" ">
                         @csrf
                         <button class="dropdown-item" type="submit">

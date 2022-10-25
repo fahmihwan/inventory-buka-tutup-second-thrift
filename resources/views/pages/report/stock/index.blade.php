@@ -14,7 +14,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List kategori produk </li>
+                        <li class="breadcrumb-item active" aria-current="page">List Stok</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
         <div class="card">
             <div class="card-header p-3 d-flex justify-content-between">
                 <div>
-                    Kategori Produk
+                    List Stok
                 </div>
                 <a href="/report/stock/print" class="btn btn-sm btn-primary ms-2" style="">
                     <i class="fa-solid fa-print"></i>

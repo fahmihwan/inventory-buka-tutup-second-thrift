@@ -81,5 +81,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 // demo setting account
+Route::get('/demo/create', [AuthController::class, 'demo_create']);
 Route::post('/setting/account/store', [AuthController::class, 'store']);
 Route::delete('/setting/account/{id}/destroy', [AuthController::class, 'destroy']);

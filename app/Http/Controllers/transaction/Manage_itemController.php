@@ -12,7 +12,7 @@ use App\Models\Receiving;
 // use Illuminate\Database\Capsule\Manager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Svg\Tag\Rect;
 
 class Manage_itemController extends Controller
 {
@@ -156,19 +156,29 @@ class Manage_itemController extends Controller
     public function destroy($id)
     {
         $manage_item = Manage_item::where('id', $id)->first();
-        $item = Item::where('id', $manage_item->id)->first();
+        $item = Item::where('id', $manage_item->item_id)->first();
+
 
         $current_qty_item = $item->qty;
         $current_qty_item -= $manage_item->qty;
 
+        $receiving = Receiving::where('id', $manage_item->receiving_id)->first();
+        $result = $receiving->open_qty - $manage_item->qty;
+
         try {
             DB::beginTransaction();
 
-            // delete manage_item 
+            // update receiving
+            Receiving::where('id', $receiving->id)->update([
+                'open_qty' => $result
+            ]);
+
+            // update item
             Manage_item::where('id', $manage_item->id)->delete();
             Item::where('id', $item->id)->update([
                 'qty' => $current_qty_item,
             ]);
+
 
             DB::commit();
         } catch (\Throwable $th) {

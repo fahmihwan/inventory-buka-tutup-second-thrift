@@ -61,7 +61,7 @@
                                                  @error('address')
                                                     is-invalid
                                                 @enderror"
-                                                    id="address" placeholder="nomor hp" value="{{ old('address') }}"
+                                                    id="address" placeholder="alamat" value="{{ old('address') }}"
                                                     required>
                                                 @error('address')
                                                     <div class="valid-feedback">

@@ -16,13 +16,10 @@ class AuthController extends Controller
 
     public function authenticate(Request $request)
     {
-
-
         $credentials = $request->validate([
             'username' => 'required',
             'password' => 'required',
         ]);
-
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -45,6 +42,7 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'name' => 'required',
             'username' => 'required|unique:users',
@@ -66,6 +64,8 @@ class AuthController extends Controller
     {
 
         User::where('id', $id)->delete();
+
+        return redirect('setting/account/list-account');
     }
 
 
@@ -75,5 +75,10 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function demo_create()
+    {
+        return view('welcome');
     }
 }

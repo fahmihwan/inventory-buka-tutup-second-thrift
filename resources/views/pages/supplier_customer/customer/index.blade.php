@@ -25,7 +25,7 @@
     <section class="section">
         <div class="card">
             <div class="card-header p-3">
-                Kategori Produk
+                List Customer
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">

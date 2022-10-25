@@ -14,7 +14,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">master</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">List kategori produk </li>
+                        <li class="breadcrumb-item active" aria-current="page">List Issuing </li>
                     </ol>
                 </nav>
             </div>
@@ -68,7 +68,7 @@
     <section class="section">
         <div class="card">
             <div class="card-header p-3">
-                Kategori Produk
+                List Issuing
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1">
