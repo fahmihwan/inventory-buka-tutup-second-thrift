@@ -19,6 +19,12 @@
                     <div class="card pt-4 mt-0 ">
                         <div class="card-body">
                             <div class="text-center mb-5">
+                                @if (session('loginError'))
+                                <div class="alert alert-danger">
+                                    {{ session('loginError') }}
+                                </div>
+                                @endif
+
                                 <img src="{{ asset('assets/img-logo/logo.png') }}" height="80" class='mb-4'>
                                 <h3>Sign In</h3>
                                 <p>Please sign in to continue to Dashboard.</p>
@@ -28,7 +34,7 @@
                                 <div class="form-group position-relative has-icon-left">
                                     <label for="username">Username</label>
                                     <div class="position-relative">
-                                        <input type="text" name="username" class="form-control" id="username">
+                                        <input type="text" name="username" class="form-control" id="username" required>
                                         <div class="form-control-icon">
                                             <i data-feather="user"></i>
                                         </div>
@@ -39,7 +45,8 @@
                                         <label for="password">Password</label>
                                     </div>
                                     <div class="position-relative">
-                                        <input type="password" name="password" class="form-control" id="password">
+                                        <input type="password" name="password" class="form-control" id="password"
+                                            required>
                                         <div class="form-control-icon">
                                             <i data-feather="lock"></i>
                                         </div>

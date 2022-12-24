@@ -18,7 +18,7 @@ class Receiving extends Model
 
     public function category_product()
     {
-        return $this->belongsTo(Category_product::class);
+        return $this->belongsTo(Category_product::class)->withTrashed();
     }
 
     public function scopeFilter($query, array $filters)

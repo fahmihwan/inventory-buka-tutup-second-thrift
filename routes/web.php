@@ -79,7 +79,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('report/receiving/{id}/print', [ReportReceivingController::class, 'print_first']);
 });
 
-
 // demo setting account
 Route::get('/demo/create', [AuthController::class, 'demo_create']);
 Route::post('/setting/account/store', [AuthController::class, 'store']);
