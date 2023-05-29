@@ -47,28 +47,41 @@
     </div>
     <div class="container">
         <table>
-            <tr>
-                <th>No</th>
-                <th>Date</th>
-                <th>Ball Number</th>
-                <th>Supplier</th>
-                <th>Category </th>
-                <th>Target Qty</th>
-                <th>Open Qty</th>
-                <th>Total Price</th>
-            </tr>
-            @foreach ($datas as $data)
+            <thead>
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data->date }}</td>
-                    <td>{{ $data->ball_number }}</td>
-                    <td>{{ $data->supplier->name }}</td>
-                    <td>{{ $data->category_product->name }}</td>
-                    <td>{{ $data->target_qty }}</td>
-                    <td>{{ $data->open_qty }}</td>
-                    <td>{{ 'Rp' . $data->price }}</td>
+                    <th>No</th>
+                    <th>Date</th>
+                    <th>Ball Number</th>
+                    <th>Supplier</th>
+                    <th>Category </th>
+                    <th>Target Qty</th>
+                    <th>Open Qty</th>
+                    <th>Total Price</th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                <?php $total = 0; ?>;
+                @foreach ($datas as $data)
+                    <?php $total += $data->price; ?>;
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $data->date }}</td>
+                        <td>{{ $data->ball_number }}</td>
+                        <td>{{ $data->supplier->name }}</td>
+                        <td>{{ $data->category_product->name }}</td>
+                        <td>{{ $data->target_qty }}</td>
+                        <td>{{ $data->open_qty }}</td>
+                        <td>{{ 'Rp' . $data->price }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="7">total</td>
+                    <td colspan="1">Rp.{{ $total }}</td>
+                </tr>
+            </tfoot>
+
 
         </table>
     </div>

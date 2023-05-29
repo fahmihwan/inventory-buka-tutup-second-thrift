@@ -42,9 +42,17 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach ($receiving_data as $data)
                             {{-- <tr class="p-0 m-0 @if ($data->open_qty != $data->target_qty) table-danger @endif "> --}}
+                            @php
+                                $total += $data->price;
+                            @endphp
                             <tr class="p-0 m-0  ">
+                                {{-- <td class="p-2">{{ count($data->price) }}</td> --}}
                                 <td class="p-3">{{ $loop->iteration }}</td>
                                 <td class="p-3">{{ $data->date }}</td>
                                 <td class="p-3">{{ $data->ball_number }}</td>
@@ -68,7 +76,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-end">
+                    <p>total : Rp{{ $total }}</p>
+                </div>
             </div>
+
         </div>
     </section>
 @endsection

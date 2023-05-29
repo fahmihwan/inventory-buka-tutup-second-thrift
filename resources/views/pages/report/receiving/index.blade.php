@@ -89,12 +89,19 @@
                             <th class="p-2">Total
                                 <br> Price
                             </th>
-                            <th class="p-0">Action</th>
+                            <th class="p-0">Action </th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                        @endphp
                         @foreach ($datas as $data)
+                            @php
+                                $total += $data->price;
+                            @endphp
                             <tr class="p-0 m-0 ">
+
                                 <td class="p-2">{{ $loop->iteration }}</td>
                                 <td class="p-2" style="width: 115px;">{{ $data->date }}</td>
                                 <td class="p-1" style="width:140px;">{{ $data->ball_number }}</td>
@@ -113,6 +120,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="float-end">
+                    <p>total : Rp{{ $total }}</p>
+                </div>
             </div>
         </div>
     </section>
