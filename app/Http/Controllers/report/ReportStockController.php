@@ -13,7 +13,6 @@ class ReportStockController extends Controller
 
     public function index()
     {
-
         $item = Item::with(['category_brand', 'category_product'])->get();
         return view('pages.report.stock.index', [
             'items' => $item
@@ -37,13 +36,10 @@ class ReportStockController extends Controller
     {
         $item = Item::with(['category_brand', 'category_product'])->get();
 
-        return view('pages.report.issuing.index', [
-            'item' => $item
+        $pdf = PDF::loadview('pages.report.stock.print', [
+            'items' => $item
         ]);
-        // $pdf = PDF::loadview('pages.report.stock.print', [
-        //     'items' => $item
-        // ]);
 
-        // return $pdf->download('laporan-stok-pdf');
+        return $pdf->download('laporan-stok-pdf');
     }
 }
